@@ -50,3 +50,12 @@ or      rax, 1         # rax = 1
 and     rdi, 1         # rdi = 0 if even, 1 if odd
 xor     rax, rdi       # if rdi == 1, rax = 0 and vice versa
 ```
+## ex 10
++ move the value stored at 0x404000 into rax
++ increment the value stored at the address 0x404000 by 0x1337
+```
+mov     rax, [0x404000]
+mov     rdi, rax
+add     rdi, 0x1337
+mov     [0x404000], rdi
+```
