@@ -18,3 +18,11 @@ mov     al, dil
 mov     bx, si
 ```
 ## ex 7
++ only use these instructions: mov, shr, shl
++ rax = the 5th least significant byte of rdi
+```
+shr     rdi, 32 # 4*8
+shl     rdi, 56 # 7*8
+shr     rdi, 56
+mov     al, dil
+```
