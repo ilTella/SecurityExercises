@@ -59,3 +59,14 @@ mov     rdi, rax
 add     rdi, 0x1337
 mov     [0x404000], rdi
 ```
+## ex 11
++ rax = byte at 0x404000
++ rbx = word at 0x404000
++ rcx = double word at 0x404000
++ rdx = quad word at 0x404000
+```
+mov     al, [0x404000]
+mov     bx, [0x404000]
+mov     ecx, [0x404000]
+mov     rdx, [0x404000]
+```
