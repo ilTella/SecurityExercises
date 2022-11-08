@@ -70,3 +70,22 @@ mov     bx, [0x404000]
 mov     ecx, [0x404000]
 mov     rdx, [0x404000]
 ```
+## ex 12
++ [rdi] = 0xdeadbeef00001337
++ [rsi] = 0xc0ffee0000
+```
+mov     rax, 0xdeadbeef00001337
+mov     rbx, 0xc0ffee0000
+mov     [rdi], rax
+mov     [rsi], rbx
+```
+## ex 13
++ load two consecutive quad words from the address stored in rdi
++ calculate the sum of the previous steps quad words.
++ [rsi] = sum
+```
+mov     rax, [rdi]
+mov     rbx, [rdi + 8]
+add     rax, rbx
+mov     [rsi], rax
+```
