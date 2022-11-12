@@ -89,3 +89,19 @@ mov     rbx, [rdi + 8]
 add     rax, rbx
 mov     [rsi], rax
 ```
+## ex 14
++ subtract rdi from the top value on the stack
+```
+pop     rax
+sub     rax, rdi
+push    rax
+```
+## ex 15
++ use only the instructions: push, pop
++ swap values in rdi and rsi
+```
+push    rdi
+push    rsi
+pop     rdi
+pop     rsi
+```
