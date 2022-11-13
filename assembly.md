@@ -105,3 +105,36 @@ push    rsi
 pop     rdi
 pop     rsi
 ```
+## ex 16
++ do NOT use these instructions: pop
++ calculate the average of 4 consecutive quad words stored on the stack
++ store the average on the top of the stack
+```
+mov     rax, [rsp]
+mov     rbx, [rsp + 8]
+mov     rsi, [rsp + 16]
+mov     rdi, [rsp + 24]
+
+add     rax, rbx
+add     rax, rsi
+add     rax, rdi
+
+shr     rax, 2          # divide rax by 4
+
+mov     [rsp - 8], rax
+```
+## ex 17
++ create a two jump trampoline:
+1. make the first instruction in your code a jmp
+2. make that jmp a relative jump to 0x51 bytes from its current position
+3. at 0x51 write the following code:
+4. place the top value on the stack into register rdi
+5. jmp to the absolute address 0x403000
+```
+jmp     .code
+81 x nop
+.code:
+pop     rdi
+mov     rax, 0x403000
+jmp     rax
+```
