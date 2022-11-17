@@ -138,3 +138,16 @@ pop     rdi
 mov     rax, 0x403000
 jmp     rax
 ```
+## ex 18
++ use at least once the following instructions: jmp (any variant), cmp
++ implement the following:  
+if [rdi] is 0x7f454c46:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rax = [rdi + 4] + [rdi + 8] + [rdi + 12]  
+else if [rdi] is 0x00005A4D:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rax = [rdi + 4] - [rdi + 8] - [rdi + 12]  
+else:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rax = [rdi + 4] * [rdi + 8] * [rdi + 12]  
+
+```
+
+```
