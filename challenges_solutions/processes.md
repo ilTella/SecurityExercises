@@ -210,3 +210,18 @@ p3 = subprocess.run(["/bin/rev"], stdin=p2.stdout)
 - the challenge checks for a specific process at the other end of stdin : cat
 - the challenge will check for a hardcoded password over stdin : hybsgpbp
 ???
+
+# ex 53
+- the challenge checks for a specific parent process : ipython
+- the challenge checks for a specific process at the other end of stdin : rev
+- the challenge will check for a hardcoded password over stdin : password
+???
+
+# ex 54
+- the challenge checks for a specific parent process : python
+- the challenge checks for a specific process at the other end of stdout : cat
+```
+import subprocess
+p1 = subprocess.Popen(["/challenge/level"], stdout=subprocess.PIPE)
+p2 = subprocess.run(["/bin/cat"], stdin=p1.stdout)
+```
