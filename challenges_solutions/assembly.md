@@ -149,5 +149,70 @@ else:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rax = [rdi + 4] * [rdi + 8] * [rdi + 12]  
 
 ```
+mov     r8d, [rdi]
+cmp     r8d, 0x7f454c46
+jne     elseif
+mov     eax, [rdi + 4]
+add     eax, [rdi + 8]
+add     eax, [rdi + 12]
+jmp     done
 
+elseif:
+cmp     r8d, 0x00005A4D
+jne     else
+mov     eax, [rdi + 4]
+sub     eax, [rdi + 8]
+sub     eax, [rdi + 12]
+jmp     done
+
+else:
+mov     eax, [rdi + 4]
+mov     r9d, [rdi + 8]
+mul     r9d
+mov     r9d, [rdi + 12]
+mul     r9d
+
+done:
+```
+
+## ex 19
++ assume rdi will NOT be negative
++ use no more than 1 cmp instruction
++ use no more than 3 jumps (of any variant)
++ we will provide you with the number to 'switch' on in rdi.
++ we will provide you with a jump table base address in rsi.
+```
+if rdi is 0:
+    jmp 0x403008
+else if rdi is 1:
+    jmp 0x403114
+else if rdi is 2:
+    jmp 0x4031cf
+else if rdi is 3:
+    jmp 0x403294
+else:
+    jmp 0x403349
+```
+```
+```
+
+## ex 20
+Please compute the average of n consecutive quad words, where:  
++ rdi = memory address of the 1st quad word  
++ rsi = n (amount to loop for)  
++ rax = average computed  
+```
+xor     rax, rax
+xor     r8, r8
+
+loop:
+cmp     rsi, r8
+je      done
+
+add     rax, [rdi + r8 * 8]
+inc     r8
+jmp     loop
+
+done:
+div     rsi
 ```
