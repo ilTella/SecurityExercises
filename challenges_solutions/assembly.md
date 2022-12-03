@@ -194,6 +194,12 @@ else:
     jmp 0x403349
 ```
 ```
+cmp     rdi, 4
+jge     else
+jmp     [rsi + rdi * 8]
+
+else:
+jmp     [rsi + 0x20]
 ```
 
 ## ex 20
