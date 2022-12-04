@@ -222,3 +222,37 @@ jmp     loop
 done:
 div     rsi
 ```
+
+## ex 21
+```
+average = 0
+i = 0
+while x[i] < 0xff:
+    average += x[i]
+    i += 1
+average /= i
+```
+Using the above knowledge, please perform the following:
+Count the consecutive non-zero bytes in a contiguous region of memory, where:
+rdi = memory address of the 1st byte
+rax = number of consecutive non-zero bytes
+Additionally, if rdi = 0, then set rax = 0
+```
+cmp     rdi, 0
+jne     function
+xor     rax, rax
+jmp     done
+
+function:
+xor     r8, r8
+xor     rax, rax
+while:
+mov     r9, [rdi + r8]
+cmp     r9, 0
+je      done
+inc     r8
+inc     rax
+jmp     while
+
+done:
+```
