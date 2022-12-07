@@ -39,7 +39,7 @@ int main(void) {
 ## ex 30
 same as 29
 
-# ex 31
+## ex 31
 same as 29 but with
 ```
 argv[1] = "password";
@@ -59,16 +59,16 @@ envp[0] = "hxaavp=qtsnmtxmsl";
 ## ex 33
 same as 29
 
-# ex 34
+## ex 34
 same as 29
 
-# ex 35
+## ex 35
 same as 29 but executed with
 ```
 env --ignore-environment
 ```
 
-# ex 36
+## ex 36
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdout : cat
 
@@ -76,26 +76,26 @@ env --ignore-environment
 /challenge/level | cat
 ```
 
-# ex 37
+## ex 37
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdout : grep
 ```
 /challenge/level | grep flag_prefix
 ```
 
-# ex 38
+## ex 38
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdout : sed  
 ???
 
-# ex 39
+## ex 39
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdout : rev
 ```
 /challenge/level | rev | rev
 ```
 
-# ex 40
+## ex 40
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdin : cat
 - the challenge will check for a hardcoded password over stdin : password
@@ -103,7 +103,7 @@ env --ignore-environment
 cat - | /challenge/level
 ```
 
-# ex 41
+## ex 41
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdin : rev
 - the challenge will check for a hardcoded password over stdin : password
@@ -112,7 +112,7 @@ rev | /challenge/level
 ```
 then write the password reversed
 
-# ex 42
+## ex 42
 - the challenge checks for a specific parent process : shellscript
 - the challenge checks for a specific process at the other end of stdout : cat
 ```
@@ -122,7 +122,7 @@ var=`/challenge/level | cat`
 echo $var
 ```
 
-# ex 43
+## ex 43
 - the challenge checks for a specific parent process : shellscript
 - the challenge checks for a specific process at the other end of stdout : grep
 ```
@@ -132,12 +132,12 @@ var=`/challenge/level | grep flag_prefix`
 echo $var
 ```
 
-# ex 44
+## ex 44
 - the challenge checks for a specific parent process : shellscript
 - the challenge checks for a specific process at the other end of stdout : sed  
 ???
 
-# ex 45
+## ex 45
 - the challenge checks for a specific parent process : shellscript
 - the challenge checks for a specific process at the other end of stdout : rev
 ```
@@ -147,7 +147,7 @@ var=`/challenge/level| rev | rev`
 echo $var
 ```
 
-# ex 46
+## ex 46
 - the challenge checks for a specific parent process : shellscript
 - the challenge checks for a specific process at the other end of stdin : cat
 - the challenge will check for a hardcoded password over stdin : password
@@ -158,7 +158,7 @@ var=`cat - | /challenge/level`
 echo $var
 ```
 
-# ex 47
+## ex 47
 - the challenge checks for a specific parent process : shellscript
 - the challenge checks for a specific process at the other end of stdin : rev
 - the challenge will check for a hardcoded password over stdin : password
@@ -169,7 +169,7 @@ var=`rev | /challenge/level`
 echo $var
 ```
 
-# ex 48
+## ex 48
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdout : cat
 ```
@@ -179,7 +179,7 @@ p1 = subprocess.Popen(["/challenge/level"], stdout=subprocess.PIPE)
 p2 = subprocess.run(["/bin/cat"], stdin=p1.stdout)
 ```
 
-# ex 49
+## ex 49
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdout : grep
 ```
@@ -189,12 +189,12 @@ p1 = subprocess.Popen(["/challenge/level"], stdout=subprocess.PIPE)
 p2 = subprocess.run(["/bin/grep", "flag_prefix"], stdin=p1.stdout)
 ```
 
-# ex 50
+## ex 50
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdout : sed  
 ???
 
-# ex 51
+## ex 51
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdout : rev
 ```
@@ -205,19 +205,19 @@ p2 = subprocess.Popen(["/bin/rev"], stdin=p1.stdout, stdout=subprocess.PIPE)
 p3 = subprocess.run(["/bin/rev"], stdin=p2.stdout)
 ```
 
-# ex 52
+## ex 52
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdin : cat
 - the challenge will check for a hardcoded password over stdin : password  
 ???
 
-# ex 53
+## ex 53
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdin : rev
 - the challenge will check for a hardcoded password over stdin : password  
 ???
 
-# ex 54
+## ex 54
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdout : cat
 ```
@@ -226,7 +226,7 @@ p1 = subprocess.Popen(["/challenge/level"], stdout=subprocess.PIPE)
 p2 = subprocess.run(["/bin/cat"], stdin=p1.stdout)
 ```
 
-# ex 55
+## ex 55
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdout : grep
 ```
@@ -235,12 +235,12 @@ p1 = subprocess.Popen(["/challenge/embryoio_level55"], stdout=subprocess.PIPE)
 p2 = subprocess.run(["/bin/grep", "flag_prefix"], stdin=p1.stdout)
 ```
 
-# ex 56
+## ex 56
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdout : sed  
 ???
 
-# ex 57
+## ex 57
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdout : rev
 ```
@@ -250,7 +250,7 @@ p2 = subprocess.Popen(["/bin/rev"], stdin=p1.stdout, stdout=subprocess.PIPE)
 p3 = subprocess.run(["/bin/rev"], stdin=p2.stdout)
 ```
 
-# ex 58
+## ex 58
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdin : cat
 - the challenge will check for a hardcoded password over stdin : password
@@ -260,7 +260,7 @@ p1 = subprocess.Popen(["/bin/cat"], stdout=subprocess.PIPE)
 p2 = subprocess.run(["/challenge/level"], stdin=p1.stdout)
 ```
 
-# ex 59
+## ex 59
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdin : rev
 - the challenge will check for a hardcoded password over stdin : password
@@ -270,7 +270,7 @@ p1 = subprocess.Popen(["/bin/rev"], stdout=subprocess.PIPE)
 p2 = subprocess.run(["/challenge/level"], stdin=p1.stdout)
 ```
 
-# ex 60
+## ex 60
 - the challenge checks for a specific parent process : binary
 - the challenge checks for a specific process at the other end of stdout : cat
 ```
@@ -318,7 +318,7 @@ int main(void) {
 ```  
 ???
 
-# ex 66
+## ex 66
 - the challenge checks for a specific parent process : find
 ```
 #include <stdio.h>
@@ -353,7 +353,7 @@ int main(void) {
 }
 ```
 
-# ex 67
+## ex 67
 - the challenge checks for a specific parent process : find
 - the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 1:password
 same as 67 but with
@@ -362,7 +362,7 @@ same as 67 but with
 argv1[1] = "password";
 ```
 
-# ex 68
+## ex 68
 - the challenge checks for a specific parent process : shellscript
 - the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 172:password
 ```
@@ -370,7 +370,7 @@ var=`/challenge/level ... ... ... password`
 echo $var
 ```
 
-# ex 70
+## ex 70
 - the challenge checks for a specific parent process : shellscript
 - the challenge will check that the environment is empty (except LC_CTYPE, which is impossible to get rid of in some cases)
 - the challenge will check that env[KEY] holds value VALUE (listed to the right as KEY:VALUE) : 325:password
@@ -378,10 +378,10 @@ echo $var
 ```  
 ???
 
-# ex 71
+## ex 71
 ???
 
-# ex 72
+## ex 72
 - the challenge checks for a specific parent process : shellscript
 - the challenge will check that input is redirected from a specific file path : file
 - the challenge will check that it is running in a specific current working directory : /tmp/directory
@@ -394,7 +394,7 @@ echo $var
 ## ex 73  
 ???
 
-# ex 78
+## ex 78
 - the challenge checks for a specific parent process : python
 - the challenge will check that input is redirected from a specific file path : file
 - the challenge will check that it is running in a specific current working directory : /tmp/directory
