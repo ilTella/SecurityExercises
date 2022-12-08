@@ -256,3 +256,48 @@ jmp     while
 
 done:
 ```
+
+## ex 22
+Please implement the following logic: 
+``` 
+str_lower(src_addr):
+    rax = 0
+    if src_addr != 0:
+        while [src_addr] != 0x0:
+            if [src_addr] <= 90:
+                [src_addr] = foo([src_addr])
+                rax += 1
+            src_addr += 1
+```
+foo is provided at 0x403000. foo takes a single argument as a value  
+```
+str_lower:
+xor     rax, rax                            # rax = 0
+cmp     rdi, 0                              # if src_addr != 0
+je      done
+    while:
+    mov     r8, [rdi]
+    cmp     r8, 0
+    je      done                            # while [src_addr] != 0
+        cmp     r8, 90
+        jg     notif                        # if [src_addr] <= 90
+            push    rax
+            push    rdi
+            mov     rax, 0x403000
+            mov     rdi, [rdi]
+            call    rax
+            pop     rdi
+            mov     [rdi], rax              # [src_addr] = foo([src_addr])
+            pop     rax
+            inc     rax                     # rax += 1
+        notif:
+        inc     rdi                         # src_addr += 1
+        jmp     while
+done:
+xor     rax, rax 
+ret
+```  
+???
+
+## ex 23
+???

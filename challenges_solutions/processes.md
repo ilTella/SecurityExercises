@@ -134,8 +134,13 @@ echo $var
 
 ## ex 44
 - the challenge checks for a specific parent process : shellscript
-- the challenge checks for a specific process at the other end of stdout : sed  
-???
+- the challenge checks for a specific process at the other end of stdout : sed
+```
+#! /usr/bin/bash
+
+var=`/challenge/level | sed l`
+echo $var
+```
 
 ## ex 45
 - the challenge checks for a specific parent process : shellscript
@@ -191,8 +196,13 @@ p2 = subprocess.run(["/bin/grep", "flag_prefix"], stdin=p1.stdout)
 
 ## ex 50
 - the challenge checks for a specific parent process : ipython
-- the challenge checks for a specific process at the other end of stdout : sed  
-???
+- the challenge checks for a specific process at the other end of stdout : sed
+```
+ipython
+import subprocess
+p1 = subprocess.Popen(["/challenge/level"], stdout=subprocess.PIPE)
+p2 = subprocess.run(["/bin/sed", "l"], stdin=p1.stdout)
+```
 
 ## ex 51
 - the challenge checks for a specific parent process : ipython
