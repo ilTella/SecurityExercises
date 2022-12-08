@@ -86,7 +86,9 @@ env --ignore-environment
 ## ex 38
 - the challenge checks for a specific parent process : bash
 - the challenge checks for a specific process at the other end of stdout : sed  
-???
+```
+/challenge/level | sed l
+```
 
 ## ex 39
 - the challenge checks for a specific parent process : bash
@@ -248,7 +250,11 @@ p2 = subprocess.run(["/bin/grep", "flag_prefix"], stdin=p1.stdout)
 ## ex 56
 - the challenge checks for a specific parent process : python
 - the challenge checks for a specific process at the other end of stdout : sed  
-???
+```
+import subprocess
+p1 = subprocess.Popen(["/challenge/embryoio_level56"], stdout=subprocess.PIPE)
+p2 = subprocess.run(["/bin/sed", "l"], stdin=p1.stdout)
+```
 
 ## ex 57
 - the challenge checks for a specific parent process : python
@@ -365,30 +371,32 @@ int main(void) {
 
 ## ex 67
 - the challenge checks for a specific parent process : find
-- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 1:password
+- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 1:value
 same as 67 but with
 ```
 // inside level execve 
-argv1[1] = "password";
+argv1[1] = "value";
 ```
 
 ## ex 68
 - the challenge checks for a specific parent process : shellscript
-- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 172:password
+- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 172:value
 ```
-var=`/challenge/level ... ... ... password`
+var=`/challenge/level ... ... ... value`
 echo $var
 ```
 
 ## ex 70
 - the challenge checks for a specific parent process : shellscript
 - the challenge will check that the environment is empty (except LC_CTYPE, which is impossible to get rid of in some cases)
-- the challenge will check that env[KEY] holds value VALUE (listed to the right as KEY:VALUE) : 325:password
-```
-```  
+- the challenge will check that env[KEY] holds value VALUE (listed to the right as KEY:VALUE) : 325:value  
 ???
 
 ## ex 71
+- the challenge checks for a specific parent process : shellscript
+- the challenge will check that the environment is empty (except LC_CTYPE, which is impossible to get rid of in some cases)
+- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 245:value
+- the challenge will check that env[KEY] holds value VALUE (listed to the right as KEY:VALUE) : 37:value   
 ???
 
 ## ex 72
@@ -404,6 +412,14 @@ echo $var
 ## ex 73  
 ???
 
+## ex 74
+- the challenge checks for a specific parent process : python
+- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 29:value
+```
+import subprocess
+p1 = subprocess.run(["/challenge/embryoio_level74", "a" x 28, "value"])
+```
+
 ## ex 78
 - the challenge checks for a specific parent process : python
 - the challenge will check that input is redirected from a specific file path : file
@@ -412,4 +428,13 @@ echo $var
 import subprocess
 i = open("file", "r")
 subprocess.run(["/challenge/level"], stdin=i)
+```
+
+## ex 80
+- the challenge checks for a specific parent process : binary
+- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 177:value  
+same as 29 but:
+```
+for (int i = 1; i <= 178; i++)
+  argv[i] = "value";
 ```

