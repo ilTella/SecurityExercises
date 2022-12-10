@@ -108,3 +108,12 @@ inc     BYTE PTR [rip]
 + forbidden byte sequences: 0f05 (`syscall`), 0f34 (`sysenter`), 80cd (`int`)
 + removing write permissions from first 4096 bytes of shellcode  
 same as 5, but add 4096 nops before actual code
+
+## ex 7
++ can't use stdin, stdout, stderr  
+???
+
+## ex 8
++ reading 0x12 bytes from stdin
++ removing write permissions from first 4096 bytes of shellcode  
+???
