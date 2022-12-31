@@ -117,3 +117,46 @@ same as 5, but add 4096 nops before actual code
 + reading 0x12 bytes from stdin
 + removing write permissions from first 4096 bytes of shellcode  
 ???
+
+## ex 9
+This challenge modified your shellcode by overwriting every other 10 bytes with 0xcc. 0xcc, when interpreted as an
+instruction is an `INT 3`, which is an interrupt to call into the debugger. You must avoid these modifications in your
+shellcode
+```
+```  
+???
+
+## ex 10
+This challenge just sorted your shellcode using bubblesort. Keep in mind the impact of memory endianness on this sort
+(e.g., the LSB being the right-most byte). This sort processed your shellcode 8 bytes at a time.    
+```
+```  
+???
+
+## ex 11
+This challenge just sorted your shellcode using bubblesort. Keep in mind the impact of memory endianness on this sort
+(e.g., the LSB being the right-most byte). This sort processed your shellcode 8 bytes at a time.  
+This challenge is about to close stdin, which means that it will be harder to pass in a stage-2 shellcode. You will need
+to figure an alternate solution (such as unpacking shellcode in memory) to get past complex filters.
+```
+```  
+???
+
+## ex 12
+This challenge requires that every byte in your shellcode is unique!  
+```
+```  
+???
+
+## ex 13
+Reading 0xc bytes from stdin.  
+Removing write permissions from first 4096 bytes of shellcode.  
+```
+```  
+???
+
+## ex 14
+Reading 0x6 bytes from stdin.  
+```
+```  
+???

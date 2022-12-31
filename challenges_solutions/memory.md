@@ -1,3 +1,7 @@
+```
+objdump -M intel -d /challenge/level > dump.txt
+```
+
 ## ex 1.0
 Payload size: 25  
 Insert 'a' x 25

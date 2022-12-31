@@ -221,13 +221,23 @@ p3 = subprocess.run(["/bin/rev"], stdin=p2.stdout)
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdin : cat
 - the challenge will check for a hardcoded password over stdin : password  
-???
+```
+ipython
+import subprocess
+p1 = subprocess.Popen(["/bin/cat", "input.txt"], stdout=subprocess.PIPE) # in input repeat password many times
+p2 = subprocess.run(["/challenge/level"], stdin=p1.stdout)
+```
 
 ## ex 53
 - the challenge checks for a specific parent process : ipython
 - the challenge checks for a specific process at the other end of stdin : rev
 - the challenge will check for a hardcoded password over stdin : password  
-???
+```
+ipython
+import subprocess
+p1 = subprocess.Popen(["/bin/rev", "input.txt"], stdout=subprocess.PIPE) # in input repeat password inverted many times
+p2 = subprocess.run(["/challenge/level"], stdin=p1.stdout)
+```
 
 ## ex 54
 - the challenge checks for a specific parent process : python
@@ -289,50 +299,54 @@ p2 = subprocess.run(["/challenge/level"], stdin=p1.stdout)
 ## ex 60
 - the challenge checks for a specific parent process : binary
 - the challenge checks for a specific process at the other end of stdout : cat
+same as 29 but:  
 ```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+./es | cat
+```
 
-void pwncollege(void) {
-  int pipefds[2];
+## ex 61
+- the challenge checks for a specific parent process : binary
+- the challenge checks for a specific process at the other end of stdout : grep  
+same as 29 but:  
+```
+./es | grep flag_prefix
+```
 
-  char **argv1 = calloc(5, sizeof(char*));
-  argv1[0] = "/challenge/level";
+## ex 62
+- the challenge checks for a specific parent process : binary
+- the challenge checks for a specific process at the other end of stdout : sed  
+same as 29 but:  
+```
+./es | sed l
+```
 
-  char **argv2 = calloc(5, sizeof(char*));
-  argv2[0] = "/bin/cat";
- 
-  if (pipe(pipefds) == -1) {
-    perror("pipe");
-    exit(EXIT_FAILURE);
-  }
- 
-  pid_t pid = fork();
- 
-  if (pid == 0) { // in child process
-    close(pipefds[0]);
-    dup2(pipefds[1], 1);
-    execve(argv1[0], (char **)argv1, NULL); //***
-  }
- 
-  if (pid > 0) { // in main process
-    wait(NULL);
-    dup2(pipefds[0], 0);
-    close(pipefds[1]);
-    execve(argv2[0], (char **)argv2, NULL); //***
-  }
- 
-}
+## ex 63
+- the challenge checks for a specific parent process : binary
+- the challenge checks for a specific process at the other end of stdout : rev  
+same as 29 but:  
+```
+./es | rev | rev
+```
 
-int main(void) {
-    pwncollege();
-    return 0;
-}
-```  
-???
+## ex 64
+- the challenge checks for a specific parent process : binary
+- the challenge checks for a specific process at the other end of stdin : cat
+- the challenge will check for a hardcoded password over stdin : password  
+same as 29 but:  
+```
+echo password > input.txt
+cat input.txt | ./es
+```
+
+## ex 65
+- the challenge checks for a specific parent process : binary
+- the challenge checks for a specific process at the other end of stdin : rev
+- the challenge will check for a hardcoded password over stdin : password
+same as 29 but:  
+```
+echo inverted_password > input.txt
+rev input.txt | ./es
+```
 
 ## ex 66
 - the challenge checks for a specific parent process : find
@@ -416,6 +430,11 @@ echo $var
 ```
 
 ## ex 73  
+- the challenge checks for a specific parent process : shellscript
+- the challenge will check that it is running in a specific current working directory : /tmp/yppaqz
+- the challenge will check to make sure that the parent's parent CWD to be different than the challenge's CWD  
+```
+```
 ???
 
 ## ex 74
@@ -611,7 +630,24 @@ same as 95
 ## ex 98
 - the challenge checks for a specific parent process : shellscript
 - the challenge will require the parent to send number of signals : 5  
-???
+```
+challenge="$1"
+echo $challenge
+if [ ! -z "$challenge" ]; then
+    segnali=${challenge#*:}
+    pid=${challenge%:*}
+    pid=`echo $pid | tr -dc "0-9"`
+    echo "PID: " $pid
+    segnali=`echo $segnali | tr "',][" " "`
+    echo $segnali
+    for segnale in $segnali
+    do
+        echo "Segnale: " $segnale
+        kill -$segnale $pid
+        sleep 0.1
+    done
+fi
+```
 
 ## ex 99
 - the challenge checks for a specific parent process : python
@@ -643,8 +679,8 @@ same as 99
 ## es 103
 - the challenge checks for a specific parent process : python
 - the challenge will make sure that stdin is redirected from a fifo
-- the challenge will check for a hardcoded password over stdin : password
-???
+- the challenge will check for a hardcoded password over stdin : password  
+same as 116
 
 ## ex 104
 - the challenge checks for a specific parent process : python
@@ -693,7 +729,7 @@ same as 99
 ## ex 111
 - the challenge checks for a specific parent process : python
 - the challenge will require the parent to send number of signals : 5  
-???
+same as 98
 
 ## ex 112
 - the challenge checks for a specific parent process : binary
@@ -727,7 +763,15 @@ same as 114
 - the challenge checks for a specific parent process : binary
 - the challenge will make sure that stdin is redirected from a fifo
 - the challenge will check for a hardcoded password over stdin : password  
-???
+```
+./es < FIFOIN
+```
+```
+echo password > FIFOIN
+```
+```
+cat > FIFOIN
+```
 
 ## ex 117
 - the challenge checks for a specific parent process : binary
@@ -780,31 +824,45 @@ same as 29
 ## ex 124
 - the challenge checks for a specific parent process : binary
 - the challenge will require the parent to send number of signals : 5
-???
+same as 29 + 98
 
 ## ex 125
 - the challenge checks for a specific parent process : shellscript
 - the challenge will force the parent process to solve a number of arithmetic problems : 50
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
 - the complexity (in terms of nested expressions) of the arithmetic problems : 5  
-???
+same as 126
 
 ## ex 126
 - the challenge checks for a specific parent process : shellscript
 - the challenge will force the parent process to solve a number of arithmetic problems : 500
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
 - the complexity (in terms of nested expressions) of the arithmetic problems : 10  
-???
+```
+cat > FIFOIN
+```
+```
+/challenge/level < FIFOIN > FIFOOUT
+```
+```
+cd ./empty
+challenge=`tail -1 ../FIFOOUT`
+challenge=${challenge#*: }
+echo "print($challenge)" | python > ../FIFOIN
+```
+```
+for i in {1..500}; do (./mathscript2.sh; sleep 0.5); done
+```
 
 ## ex 127
 - the challenge checks for a specific parent process : shellscript
-- the challenge will require the parent to send number of signals : 50
-???
+- the challenge will require the parent to send number of signals : 50  
+same as 98
 
 ## ex 128
 - the challenge checks for a specific parent process : shellscript
-- the challenge will require the parent to send number of signals : 500
-???
+- the challenge will require the parent to send number of signals : 500  
+same as 98
 
 ## ex 129
 - the challenge checks for a specific parent process : shellscript
@@ -812,32 +870,32 @@ same as 29
 - the challenge checks for a specific process at the other end of stdout : cat
 - the challenge will force the parent process to solve a number of arithmetic problems : 50
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 5
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 5  
+same as 126
 
 ## ex 130
 - the challenge checks for a specific parent process : python
 - the challenge will force the parent process to solve a number of arithmetic problems : 50
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 5
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 5  
+same as 126
 
 ## ex 131
 - the challenge checks for a specific parent process : python
 - the challenge will force the parent process to solve a number of arithmetic problems : 500
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 10
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 10  
+same as 126
 
 ## ex 132
 - the challenge checks for a specific parent process : python
 - the challenge will require the parent to send number of signals : 50
-???
+same as 98
 
 ## ex 133
 - the challenge checks for a specific parent process : python
 - the challenge will require the parent to send number of signals : 500
-???
+same as 98
 
 ## ex 134
 - the challenge checks for a specific parent process : python
@@ -845,32 +903,32 @@ same as 29
 - the challenge checks for a specific process at the other end of stdout : cat
 - the challenge will force the parent process to solve a number of arithmetic problems : 50
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 5
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 5  
+same as 126
 
 ## ex 135
 - the challenge checks for a specific parent process : binary
 - the challenge will force the parent process to solve a number of arithmetic problems : 50
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 5
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 5  
+same as 126
 
 ## ex 136
 - the challenge checks for a specific parent process : binary
 - the challenge will force the parent process to solve a number of arithmetic problems : 500
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 10
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 10  
+same as 126
 
 ## ex 137
 - the challenge checks for a specific parent process : binary
-- the challenge will require the parent to send number of signals : 50
-???
+- the challenge will require the parent to send number of signals : 50  
+same as 98
 
 ## ex 138
 - the challenge checks for a specific parent process : binary
-- the challenge will require the parent to send number of signals : 500
-???
+- the challenge will require the parent to send number of signals : 500  
+same as 98
 
 ## ex 139
 - the challenge checks for a specific parent process : binary

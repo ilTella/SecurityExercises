@@ -271,6 +271,11 @@ str_lower(src_addr):
 ```
 foo is provided at 0x403000. foo takes a single argument as a value  
 ```
+call str_lower
+
+mov     rax, 60
+syscall
+
 str_lower:
 xor     rax, rax                            # rax = 0
 cmp     rdi, 0                              # if src_addr != 0
@@ -284,7 +289,7 @@ je      done
             push    rax
             push    rdi
             mov     rax, 0x403000
-            mov     rdi, [rdi]
+            mov     rdi, r8
             call    rax
             pop     rdi
             mov     [rdi], rax              # [src_addr] = foo([src_addr])
@@ -294,10 +299,40 @@ je      done
         inc     rdi                         # src_addr += 1
         jmp     while
 done:
-xor     rax, rax 
 ret
 ```  
 ???
 
 ## ex 23
+please make function(s) that implements the following:
+```
+most_common_byte(src_addr, size):
+    b = 0
+    i = 0
+    for i <= size-1:
+        curr_byte = [src_addr + i]
+        [stack_base - curr_byte] += 1
+    b = 0
+
+    max_freq = 0
+    max_freq_byte = 0
+    for b <= 0xff:
+        if [stack_base - b] > max_freq:
+            max_freq = [stack_base - b]
+            max_freq_byte = b
+
+    return max_freq_byte
+```
+
+Assumptions:
+- There will never be more than 0xffff of any byte
+- The size will never be longer than 0xffff
+- The list will have at least one element
+Constraints:
+- You must put the "counting list" on the stack
+- You must restore the stack like in a normal function
+- You cannot modify the data at src_addr
+
+```
+```
 ???
