@@ -685,7 +685,9 @@ same as 116
 ## ex 104
 - the challenge checks for a specific parent process : python
 - the challenge will make sure that stdout is a redirected from fifo  
-???
+```
+python pyscript.py > FIFOX | cat FIFOOUT
+```
 
 ## ex 105
 - the challenge checks for a specific parent process : python
@@ -776,7 +778,12 @@ cat > FIFOIN
 ## ex 117
 - the challenge checks for a specific parent process : binary
 - the challenge will make sure that stdout is a redirected from fifo  
-???
+```
+cat > FIFOOUT
+```
+```
+./es > FIFOOUT
+```
 
 ## ex 118
 - the challenge checks for a specific parent process : binary
@@ -936,23 +943,42 @@ same as 98
 - the challenge checks for a specific process at the other end of stdout : cat
 - the challenge will force the parent process to solve a number of arithmetic problems : 50
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*&^%|
-- the complexity (in terms of nested expressions) of the arithmetic problems : 5
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 5  
+same as 126 but:  
+```
+cat FIFOIN | ./es | cat > FIFOOUT
+```
 
 ## ex 140
 - the challenge checks for a specific (network) client process : shellscript
 - the challenge will listen for input on a TCP port : 1356
 - the challenge will force the parent process to solve a number of arithmetic problems : 5
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*%
-- the complexity (in terms of nested expressions) of the arithmetic problems : 3
-???
+- the complexity (in terms of nested expressions) of the arithmetic problems : 3  
+```
+cd ./empty
+
+exec 3<>/dev/tcp/127.0.0.1/1356
+
+while read line <&3
+do
+    echo $line
+    challenge=`echo $line | grep " Please send the solution for"`
+    if [ ! -z "$challenge" ];
+    then
+        challenge=${challenge#*: }
+        echo "Challenge: " $challenge
+        echo "print($challenge)" | python >&3
+    fi
+done
+```
 
 ## ex 141
 - the challenge checks for a specific (network) client process : python
 - the challenge will listen for input on a TCP port : 1927
 - the challenge will force the parent process to solve a number of arithmetic problems : 5
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*%
-- the complexity (in terms of nested expressions) of the arithmetic problems : 3
+- the complexity (in terms of nested expressions) of the arithmetic problems : 3  
 ???
 
 ## ex 142
@@ -960,5 +986,5 @@ same as 98
 - the challenge will listen for input on a TCP port : 1493
 - the challenge will force the parent process to solve a number of arithmetic problems : 5
 - the challenge will use the following arithmetic operations in its arithmetic problems : +*%
-- the complexity (in terms of nested expressions) of the arithmetic problems : 3
+- the complexity (in terms of nested expressions) of the arithmetic problems : 3  
 ???
